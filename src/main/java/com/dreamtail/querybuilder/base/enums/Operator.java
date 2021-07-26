@@ -1,5 +1,8 @@
 package com.dreamtail.querybuilder.base.enums;
 
+/**
+ * 连接表达式
+ */
 public enum Operator {
     ALL("all", "Returns `true` if all the inputs are `true`"),
     ANY("any", "Returns `true` if any the input is `true`");

@@ -1,4 +1,4 @@
-package com.dreamtail.querybuilder.support;
+package com.dreamtail.querybuilder.examples;
 
 import lombok.Data;
 
@@ -14,4 +14,5 @@ public class User {
     String name;
     String sex;
     Integer age;
+    String city;
 }
