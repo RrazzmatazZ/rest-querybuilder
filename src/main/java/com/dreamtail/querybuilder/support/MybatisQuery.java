@@ -25,7 +25,7 @@ public class MybatisQuery<M> extends BaseService<QueryWrapper<M>> {
         return queryWrapper;
     }
 
-    private void buildMybatisQueryWithChild(QueryWrapper<M> queryWrapper, Expression expression){
+    private void buildMybatisQueryWithChild(QueryWrapper<M> queryWrapper, Expression expression) {
         Operator operator = this.getOperator(expression.getOperator());
         for (int i = 0; i < expression.getArgs().size(); i++) {
             String[] arg = expression.getArgs().get(i);
@@ -34,14 +34,14 @@ public class MybatisQuery<M> extends BaseService<QueryWrapper<M>> {
         }
 
         if (expression.getChild() != null && expression.getChild().length > 0) {
-            if (operator.equals(Operator.ANY)){
-                queryWrapper.or(wrapper->{
+            if (operator.equals(Operator.ANY)) {
+                queryWrapper.or(wrapper -> {
                     for (Expression childExpr : expression.getChild()) {
                         this.buildMybatisQueryWithChild(wrapper, childExpr);
                     }
                 });
-            }else {
-                queryWrapper.or(wrapper->{
+            } else {
+                queryWrapper.or(wrapper -> {
                     for (Expression childExpr : expression.getChild()) {
                         this.buildMybatisQueryWithChild(wrapper, childExpr);
                     }
@@ -53,7 +53,7 @@ public class MybatisQuery<M> extends BaseService<QueryWrapper<M>> {
     private void buildMybatisQueryComparison(QueryWrapper<M> queryWrapper, String[] arg) {
         if (arg.length < 3) throw new ArgsWrongLenException("args length not right,should be more than 3!");
         String param = this.toUnderline(arg[0]);
-        //todo 判断param是否在查询类M的param中
+        this.checkQueryParam(param);
         Comparison comparison = this.getComparison(arg[1]);
         switch (comparison) {
             case GT:

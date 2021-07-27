@@ -9,6 +9,12 @@ public abstract class BaseService<T> {
 
     protected abstract T buildQueryCondition(Expression searchModel) throws Exception;
 
+    /**
+     * 获取operator对应的枚举类型
+     *
+     * @param type operator String
+     * @return Operator
+     */
     protected Operator getOperator(String type) {
         for (Operator constants : Operator.values()) {
             if (constants.getCode().equals(type)) {
@@ -18,6 +24,12 @@ public abstract class BaseService<T> {
         throw new OperatorWrongException("wrong operator!");
     }
 
+    /**
+     * 获取Comparison对应的枚举类型
+     *
+     * @param type comparison String
+     * @return Comparison
+     */
     protected Comparison getComparison(String type) {
         for (Comparison constants : Comparison.values()) {
             if (constants.getCode().equals(type)) {
@@ -25,6 +37,15 @@ public abstract class BaseService<T> {
             }
         }
         throw new ComparisonWrongException("wrong comparison!");
+    }
+
+    /**
+     * todo 判断param是否在查询类M的param中
+     *
+     * @param param 参数名称param
+     */
+    protected void checkQueryParam(String param) {
+
     }
 
     /**

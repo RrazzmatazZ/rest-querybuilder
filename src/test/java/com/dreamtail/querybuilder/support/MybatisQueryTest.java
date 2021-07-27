@@ -1,5 +1,6 @@
 package com.dreamtail.querybuilder.support;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dreamtail.querybuilder.base.Expression;
 import com.dreamtail.querybuilder.examples.User;
@@ -23,23 +24,8 @@ public class MybatisQueryTest {
 
     @Test
     public void testBuildMybatisQuery() throws Exception {
-        List<String[]> list = new ArrayList<>();
-        list.add(new String[]{"age", "gt", "20"});
-        list.add(new String[]{"name", "like", "john"});
-
-        List<String[]> list1 = new ArrayList<>();
-        list1.add(new String[]{"city", "in", "wuhan", "shanghai"});
-        list1.add(new String[]{"city", "in", "wuhan", "shanghai"});
-        Expression expChild = new Expression()
-                .setOperator("all")
-                .setArgs(list1);
-
-        Expression expression = new Expression()
-                .setOperator("any")
-                .setArgs(list)
-                .setChild(new Expression[]{expChild})
-                ;
-
+        String expr = "{\"args\":[[\"age\",\"gt\",\"20\"],[\"name\",\"like\",\"john\"]],\"child\":[{\"args\":[[\"city\",\"in\",\"wuhan\",\"shanghai\"]],\"operator\":\"any\"}],\"operator\":\"all\"}";
+        Expression expression = JSONObject.parseObject(expr, Expression.class);
         MybatisQuery<User> mybatisQuery = new MybatisQuery<>();
         QueryWrapper<User> queryWrapper = mybatisQuery.buildQueryCondition(expression);
         userDao.selectList(queryWrapper);
