@@ -78,7 +78,7 @@ public class MybatisQuery<M> extends BaseService<QueryWrapper<M>> {
                 queryWrapper.ne(param, arg[2]);
                 break;
             case IN:
-                String[] inArgs = Arrays.copyOfRange(arg, 2, arg.length - 1);
+                String[] inArgs = Arrays.copyOfRange(arg, 2, arg.length);
                 queryWrapper.in(param, inArgs);
                 break;
         }
