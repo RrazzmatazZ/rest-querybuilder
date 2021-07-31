@@ -1,6 +1,8 @@
 package com.dreamtail.querybuilder.examples;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
  * @author xdq
@@ -11,6 +13,7 @@ import lombok.Data;
  */
 @Data
 public class User {
+    @Field("name")
     String name;
     String sex;
     Integer age;

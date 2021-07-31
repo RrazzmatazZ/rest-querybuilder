@@ -20,7 +20,7 @@ public class ESQueryTest {
     public void testBuildQuery() throws Exception {
         String expr = "{\"args\":[[\"age\",\"gt\",\"20\"],[\"name\",\"like\",\"john\"]],\"child\":[{\"args\":[[\"city\",\"in\",\"wuhan\",\"shanghai\"]],\"operator\":\"any\"}],\"operator\":\"all\"}";
         Expression expression = JSONObject.parseObject(expr, Expression.class);
-        ESQuery<User> esQuery = new ESQuery<>();
+        ESQuery<User> esQuery = new ESQuery<>(User.class);
         NativeSearchQueryBuilder queryBuilder = esQuery.buildQueryCondition(expression);
         NativeSearchQuery build = queryBuilder.build();
         System.out.println(build);

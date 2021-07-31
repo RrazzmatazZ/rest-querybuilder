@@ -26,7 +26,7 @@ public class MybatisQueryTest {
     public void testBuildMybatisQuery() throws Exception {
         String expr = "{\"args\":[[\"age\",\"gt\",\"20\"],[\"name\",\"like\",\"john\"]],\"child\":[{\"args\":[[\"city\",\"in\",\"wuhan\",\"shanghai\"]],\"operator\":\"any\"}],\"operator\":\"all\"}";
         Expression expression = JSONObject.parseObject(expr, Expression.class);
-        MybatisQuery<User> mybatisQuery = new MybatisQuery<>();
+        MybatisQuery<User> mybatisQuery = new MybatisQuery<>(User.class);
         QueryWrapper<User> queryWrapper = mybatisQuery.buildQueryCondition(expression);
         userDao.selectList(queryWrapper);
     }

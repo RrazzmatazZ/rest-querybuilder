@@ -19,7 +19,11 @@ import java.util.Arrays;
  * @description TODO
  * @date 2021/7/2 13:54
  */
-public class ESQuery<M> extends BaseService<NativeSearchQueryBuilder> {
+public class ESQuery<M> extends BaseService<NativeSearchQueryBuilder, M> {
+
+    public ESQuery(Class<M> clazz) {
+        this.setEntityClass(clazz);
+    }
 
     @Override
     protected NativeSearchQueryBuilder buildQueryCondition(Expression searchModel) throws Exception {

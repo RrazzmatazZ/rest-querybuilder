@@ -16,7 +16,11 @@ import java.util.Arrays;
  * @description TODO
  * @date 2021/7/2 13:54
  */
-public class MybatisQuery<M> extends BaseService<QueryWrapper<M>> {
+public class MybatisQuery<M> extends BaseService<QueryWrapper<M>, M> {
+
+    public MybatisQuery(Class<M> clazz) {
+        this.setEntityClass(clazz);
+    }
 
     @Override
     public QueryWrapper<M> buildQueryCondition(Expression expression) throws Exception {
